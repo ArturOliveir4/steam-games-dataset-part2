@@ -42,4 +42,33 @@ public class Date {
 
     }
 
+    public static Boolean checkDateSize(String firstDate, String secondDate){
+
+        String[] firstDateParts = firstDate.split("/");
+        String[] secondDateParts = secondDate.split("/");
+    
+        int day1 = Integer.parseInt(firstDateParts[0]);
+        int month1 = Integer.parseInt(firstDateParts[1]);
+        int year1 = Integer.parseInt(firstDateParts[2]);
+    
+        int day2 = Integer.parseInt(secondDateParts[0]);
+        int month2 = Integer.parseInt(secondDateParts[1]);
+        int year2 = Integer.parseInt(secondDateParts[2]);
+    
+        if (year1 > year2) {
+            return false;
+        } 
+        
+        else if (year1 == year2 && month1 > month2) {
+            return false;
+        } 
+        
+        else if (year1 == year2 && month1 == month2 && day1 > day2) {
+            return false;
+        }
+    
+        return true;
+
+    }
+
 }
