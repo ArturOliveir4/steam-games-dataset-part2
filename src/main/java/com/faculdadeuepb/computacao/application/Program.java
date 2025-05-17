@@ -2,9 +2,12 @@ package com.faculdadeuepb.computacao.application;
 
 import java.io.IOException;
 
-import com.faculdadeuepb.computacao.algorithms.InsertionSort;
+import com.faculdadeuepb.computacao.algorithms.CountingSort;
+import com.faculdadeuepb.computacao.algorithms.HeapSort;
 import com.faculdadeuepb.computacao.algorithms.MatrixTransformations;
-import com.faculdadeuepb.computacao.algorithms.SelectionSort;
+import com.faculdadeuepb.computacao.algorithms.MergeSort;
+import com.faculdadeuepb.computacao.algorithms.QuickSort;
+import com.faculdadeuepb.computacao.algorithms.QuickSortMedian;
 import com.faculdadeuepb.computacao.model.utils.Transformations;
 
 
@@ -15,25 +18,101 @@ public class Program {
         String[][] formatedCsvMatrix = MatrixTransformations.csvToMatrix("games_formated_release_data.csv");      
         // String[][] formatedCsvMatrixPartial = MatrixTransformations.csvToMatrixPartial("games_formated_release_data.csv", 0, 1000);  
         
-        String[][] formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
-        //SelectionSort.createCsv_SelectionSortAchievements_MediumCase(formatedCsvMatrixCopy);
-        
-        SelectionSort.createCsv_SelectionSortAchievements_BestCase(formatedCsvMatrixCopy);
+        String[][] formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix); 
+	    QuickSortMedian.createCsv_QuickSortMedianReleaseDate_MediumCase(formatedCsvMatrixCopy);
 
         formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
-        SelectionSort.createCsv_SelectionSortAchievements_WorstCase(formatedCsvMatrixCopy);
-
-        
-        
-        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
-        InsertionSort.createCsv_InsertionSortAchievements_MediumCase(formatedCsvMatrixCopy);
-        
-        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
-        InsertionSort.createCsv_InsertionSortAchievements_BestCase(formatedCsvMatrixCopy);
+        QuickSortMedian.createCsv_QuickSortMedianReleaseDate_BestCase(formatedCsvMatrixCopy);
 
         formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
-        InsertionSort.createCsv_InsertionSortAchievements_WorstCase(formatedCsvMatrixCopy);
+        QuickSortMedian.createCsv_QuickSortMedianReleaseDate_WorstCase(formatedCsvMatrixCopy);
 
+
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        QuickSortMedian.createCsv_QuickSortMedianPrice_MediumCase(formatedCsvMatrixCopy);
+
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        QuickSortMedian.createCsv_QuickSortMedianPrice_BestCase(formatedCsvMatrixCopy);
+
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        QuickSortMedian.createCsv_QuickSortMedianPrice_WorstCase(formatedCsvMatrixCopy);
+
+
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        QuickSortMedian.createCsv_QuickSortMedianAchievements_MediumCase(formatedCsvMatrixCopy);
+
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        QuickSortMedian.createCsv_QuickSortMedianAchievements_BestCase(formatedCsvMatrixCopy);
+
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        QuickSortMedian.createCsv_QuickSortMedianAchievements_WorstCase(formatedCsvMatrixCopy);
+
+
+
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        QuickSort.createCsv_QuickSortReleaseDate_MediumCase(formatedCsvMatrixCopy);
+
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        QuickSort.createCsv_QuickSortReleaseDate_BestCase(formatedCsvMatrixCopy);
+
+        //formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        //QuickSort.createCsv_QuickSortReleaseDate_WorstCase(formatedCsvMatrixCopy);
+
+
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        QuickSort.createCsv_QuickSortPrice_MediumCase(formatedCsvMatrixCopy);
+
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        QuickSort.createCsv_QuickSortPrice_BestCase(formatedCsvMatrixCopy);
+
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        QuickSort.createCsv_QuickSortPrice_WorstCase(formatedCsvMatrixCopy);
+
+
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        QuickSort.createCsv_QuickSortAchievements_MediumCase(formatedCsvMatrixCopy);
+
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        QuickSort.createCsv_QuickSortAchievements_BestCase(formatedCsvMatrixCopy);
+
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        QuickSort.createCsv_QuickSortAchievements_WorstCase(formatedCsvMatrixCopy);
+
+
+        
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        MergeSort.createCsv_MergeSortAchievements_MediumCase(formatedCsvMatrixCopy);
+        
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        MergeSort.createCsv_MergeSortAchievements_BestCase(formatedCsvMatrixCopy);
+
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        MergeSort.createCsv_MergeSortAchievements_WorstCase(formatedCsvMatrixCopy);
+
+
+
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        HeapSort.createCsv_HeapSortAchievements_MediumCase(formatedCsvMatrixCopy);
+
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        HeapSort.createCsv_HeapSortAchievements_BestCase(formatedCsvMatrixCopy);
+
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        HeapSort.createCsv_HeapSortAchievements_WorstCase(formatedCsvMatrixCopy);
+
+
+
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        CountingSort.createCsv_CountingSortAchievements_MediumCase(formatedCsvMatrixCopy);
+
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        CountingSort.createCsv_CountingSortAchievements_BestCase(formatedCsvMatrixCopy);
+
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        CountingSort.createCsv_CountingSortAchievements_WorstCase(formatedCsvMatrixCopy);
+
+
+        
 
         /*
         String[][] formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);

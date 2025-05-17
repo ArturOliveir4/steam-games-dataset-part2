@@ -53,70 +53,126 @@ public class QuickSortMedian {
         return mid; 
     }
 
-    private static void swap(String[][] array, int i, int j){
-        String[] temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+    private static void swap(String[][] rawData, int i, int j) {
+        String[] temp = rawData[i];
+        rawData[i] = rawData[j];
+        rawData[j] = temp;
+    }
+
+
+    public static String[][] quickSortMedianPrice(String[][] rawData) {
+        quickSortP(rawData, 0, rawData.length - 1);
+        return rawData;
+    }
+
+    private static void quickSortP(String[][] rawData, int low, int high) {
+        if (low < high) {
+            int pivotIndex = partitionPrice(rawData, low, high);
+            quickSortP(rawData, low, pivotIndex);
+            quickSortP(rawData, pivotIndex + 1, high);
+        }
+    }
+
+    private static int partitionPrice(String[][] rawData, int low, int high) {
+        // Mediana de 3
+        int mid = low + (high - low) / 2;
+        
+        // Ordena low, mid, high para encontrar a mediana
+        if (Double.parseDouble(rawData[low][6]) > Double.parseDouble(rawData[mid][6])){
+            swap(rawData, low, mid);
+        }
+        if (Double.parseDouble(rawData[low][6]) > Double.parseDouble(rawData[high][6])){
+            swap(rawData, low, high);
+        }
+        if (Double.parseDouble(rawData[mid][6]) > Double.parseDouble(rawData[high][6])){
+            swap(rawData, mid, high);
+        }
+        
+        // Coloca o pivô (mediana) na posição low
+        swap(rawData, mid, low);
+        
+        String[] pivot = rawData[low]; 
+        int left = low - 1;
+        int right = high + 1;
+
+        while (true) {
+            do {
+                left++;
+            } while (Double.parseDouble(rawData[left][6]) < Double.parseDouble(pivot[6]));
+
+            do {
+                right--;
+            } while (Double.parseDouble(rawData[right][6]) > Double.parseDouble(pivot[6]));
+
+            if (left >= right) {
+                return right;
+            }
+
+            swap(rawData, left, right);
+        }
     }
 
     
 
-    public static String[][] quickSortMedianPrice(String[][] rawData){
-        quickSortMedianP(rawData, 0, rawData.length - 1);
+
+
+    public static String[][] quickSortMedianAchievements(String[][] rawData) {
+        quickSortA(rawData, 0, rawData.length - 1);
         return rawData;
     }
 
-    private static void quickSortMedianP(String[][] rawData, int low, int high){
-        if(low<high){
-            int pivotIndex = partitionMedianP(rawData, low, high);
-            quickSortMedianP(rawData, low, pivotIndex - 1);
-            quickSortMedianP(rawData, pivotIndex + 1, high);
+    private static void quickSortA(String[][] rawData, int low, int high) {
+        if (low < high) {
+            int pivotIndex = partitionAchievements(rawData, low, high);
+            quickSortA(rawData, low, pivotIndex);
+            quickSortA(rawData, pivotIndex + 1, high);
         }
     }
 
-    private static int partitionMedianP(String[][] rawData, int low, int high){
-        int pivotIndex = medianOfThreeP(rawData, low, high);
-        String[] pivot = rawData[pivotIndex];
-
-        // Valor numérico do campo price (coluna 6)
-        double pivotPrice = Double.parseDouble(pivot[6]);
-        if (pivotPrice == 0.0) {
-            pivotPrice = 6.29; // Usa 6.29 só para comparação, sem modificar os dados
-            System.out.println("Pivot com 0.0 tratado logicamente como 6.29");
-        }
-
-        System.out.println("Valor bruto em pivot[6]: '" + pivot[6] + "'");
+    private static int partitionAchievements(String[][] rawData, int low, int high) {
+        // Mediana de 3
+        int mid = low + (high - low) / 2;
         
-        swap(rawData, pivotIndex, high);
-        
-        int i = low;
-        for (int j = low; j < high; j++) {
-            if (Double.parseDouble(rawData[j][6]) < pivotPrice) {
-                swap(rawData, i, j);
-                i++;
-            }
-        }
-        
-        swap(rawData, i, high);
-        return i;
-    }
-
-
-    private static int medianOfThreeP(String[][] rawData, int low, int high){
-        int mid = (low + (high - low))/2;
-        
-        if (Double.parseDouble(rawData[mid][6]) < Double.parseDouble(rawData[low][6])){
+        // Ordena low, mid, high para encontrar a mediana
+        if (MatrixTransformations.safeParseInt(rawData[low][26]) < MatrixTransformations.safeParseInt(rawData[mid][26])) {
             swap(rawData, low, mid);
         }
-        if (Double.parseDouble(rawData[high][6]) < Double.parseDouble(rawData[low][6])){
+        if (MatrixTransformations.safeParseInt(rawData[low][26]) < MatrixTransformations.safeParseInt(rawData[high][26])) {
             swap(rawData, low, high);
         }
-        if (Double.parseDouble(rawData[high][6]) < Double.parseDouble(rawData[mid][6])){
+        if (MatrixTransformations.safeParseInt(rawData[mid][26]) < MatrixTransformations.safeParseInt(rawData[high][26])) {
             swap(rawData, mid, high);
         }
         
-        return mid; 
+        // Coloca o pivô (mediana) na posição low
+        swap(rawData, mid, low);
+        
+        String[] pivot = rawData[low]; 
+        int left = low - 1;
+        int right = high + 1;
+
+        while (true) {
+            do {
+                left++;
+            } while (MatrixTransformations.safeParseInt(rawData[left][26]) > MatrixTransformations.safeParseInt(pivot[26]));
+
+            do {
+                right--;
+            } while (MatrixTransformations.safeParseInt(rawData[right][26]) < MatrixTransformations.safeParseInt(pivot[26]));
+
+            if (left >= right) {
+                return right;
+            }
+
+            swap(rawData, left, right);
+        }
     }
+
+    
+
+   
+
+
     
 
 
@@ -216,8 +272,9 @@ public class QuickSortMedian {
         long start = System.nanoTime();
 
         // Ordenando a matriz passada por parâmetro    
-        formatedCsvMatrix = quickSortMedianPrice(formatedCsvMatrix);   
+        formatedCsvMatrix = quickSortMedianPrice(formatedCsvMatrix);
 
+        
 
         long end = System.nanoTime();
         long duration = end - start; 
@@ -285,6 +342,91 @@ public class QuickSortMedian {
 
         // Criando de fato o arquivo .csv
         MatrixTransformations.createCsv(formatedCsvMatrix, "games_price_quickSortMedianaDeTres_piorCaso.csv");
+
+        System.out.println("Done\nAverage execution time : " + duration + " ns\nMemory used on average: " + memoriaUsada + " bytes");
+    }   
+
+
+
+
+    public static void createCsv_QuickSortMedianAchievements_MediumCase(String[][] formatedCsvMatrix) throws IOException{  
+        System.out.println("\nGenerating 'games_achievements_quickSortMedianaDeTres_medioCaso.csv'");
+        
+        Runtime runtime = Runtime.getRuntime();
+        runtime.gc(); 
+        long memoriaAntes = runtime.totalMemory() - runtime.freeMemory();
+
+        long start = System.nanoTime();
+
+        // Ordenando a matriz passada por parâmetro    
+        formatedCsvMatrix = quickSortMedianAchievements(formatedCsvMatrix);   
+
+        long end = System.nanoTime();
+        long duration = end - start; 
+
+        long memoriaDepois = runtime.totalMemory() - runtime.freeMemory();
+        long memoriaUsada = memoriaDepois - memoriaAntes;
+
+        // Criando de fato o arquivo .csv
+        MatrixTransformations.createCsv(formatedCsvMatrix, "games_achievements_quickSortMedianaDeTres_medioCaso.csv");
+
+        System.out.println("Done\nAverage execution time : " + duration + " ns\nMemory used on average: " + memoriaUsada + " bytes");
+    }
+
+   
+    
+    public static void createCsv_QuickSortMedianAchievements_BestCase(String[][] formatedCsvMatrix) throws IOException{  
+        System.out.println("\nGenerating 'games_achievements_quickSortMedianaDeTres_melhorCaso.csv'");
+
+        // Ordenando previamente a matriz (MELHOR CASO)
+        MatrixTransformations.orderJava_Data_Crescente(formatedCsvMatrix);
+        
+        Runtime runtime = Runtime.getRuntime();
+        runtime.gc(); 
+        long memoriaAntes = runtime.totalMemory() - runtime.freeMemory();
+
+        long start = System.nanoTime();
+
+        // Ordenando a matriz passada por parâmetro    
+        formatedCsvMatrix = quickSortMedianAchievements(formatedCsvMatrix);   
+
+        long end = System.nanoTime();
+        long duration = end - start; 
+
+        long memoriaDepois = runtime.totalMemory() - runtime.freeMemory();
+        long memoriaUsada = memoriaDepois - memoriaAntes;
+
+        // Criando de fato o arquivo .csv
+        MatrixTransformations.createCsv(formatedCsvMatrix, "games_achievements_quickSortMedianaDeTres_melhorCaso.csv");
+
+        System.out.println("Done\nAverage execution time : " + duration + " ns\nMemory used on average: " + memoriaUsada + " bytes");
+    }
+
+    
+    public static void createCsv_QuickSortMedianAchievements_WorstCase(String[][] formatedCsvMatrix) throws IOException{  
+        System.out.println("\nGenerating 'games_achievements_quickSortMedianaDeTres_piorCaso.csv'");
+        
+        // Ordenando previamente a matriz (PIOR CASO)
+        MatrixTransformations.orderJava_Data_Descrescente(formatedCsvMatrix);
+        
+        Runtime runtime = Runtime.getRuntime();
+        runtime.gc(); 
+        long memoriaAntes = runtime.totalMemory() - runtime.freeMemory();
+
+        long start = System.nanoTime();
+
+        // Ordenando a matriz passada por parâmetro    
+        formatedCsvMatrix = quickSortMedianAchievements(formatedCsvMatrix);   
+
+
+        long end = System.nanoTime();
+        long duration = end - start; 
+
+        long memoriaDepois = runtime.totalMemory() - runtime.freeMemory();
+        long memoriaUsada = memoriaDepois - memoriaAntes;
+
+        // Criando de fato o arquivo .csv
+        MatrixTransformations.createCsv(formatedCsvMatrix, "games_achievements_quickSortMedianaDeTres_piorCaso.csv");
 
         System.out.println("Done\nAverage execution time : " + duration + " ns\nMemory used on average: " + memoriaUsada + " bytes");
     }   

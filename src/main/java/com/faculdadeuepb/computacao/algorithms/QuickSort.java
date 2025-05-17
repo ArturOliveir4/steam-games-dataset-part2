@@ -79,6 +79,41 @@ public class QuickSort {
         }
     }
 
+    public static String[][] quickSortAchievements(String[][] rawData){
+        quickSortA(rawData, 0, rawData.length - 1);
+        return rawData;
+    }
+
+    private static void quickSortA(String[][] rawData, int low, int high){
+        if(low < high){
+            int pivotIndex = partitionAchievements(rawData, low, high);
+            quickSortA(rawData, low, pivotIndex);       
+            quickSortA(rawData, pivotIndex + 1, high);
+        }
+    }
+
+    private static int partitionAchievements(String[][] rawData, int low, int high){
+        String[] pivot = rawData[low]; 
+        int left = low - 1;
+        int right = high + 1;
+
+        while(true){
+            do{
+                left++;
+            }while(MatrixTransformations.safeParseInt(rawData[left][26]) > MatrixTransformations.safeParseInt(pivot[26]));
+
+            do{
+                right--;
+            }while(MatrixTransformations.safeParseInt(rawData[right][26]) < MatrixTransformations.safeParseInt(pivot[26]));
+
+            if(left >= right){
+                return right;
+            }
+
+            swap(rawData, left, right);
+        }
+    }
+
     public static void createCsv_QuickSortReleaseDate_MediumCase(String[][] formatedCsvMatrix) throws IOException{  
         System.out.println("\nGenerating 'games_release_date_QuickSort_medioCaso.csv'");
         
@@ -239,6 +274,87 @@ public class QuickSort {
 
         // Criando de fato o arquivo .csv
         MatrixTransformations.createCsv(formatedCsvMatrix, "games_price_quickSort_piorCaso.csv");
+
+        System.out.println("Done\nAverage execution time : " + duration + " ns\nMemory used on average: " + memoriaUsada + " bytes");
+    }   
+
+
+    public static void createCsv_QuickSortAchievements_MediumCase(String[][] formatedCsvMatrix) throws IOException{  
+        System.out.println("\nGenerating 'games_achievements_QuickSort_medioCaso.csv'");
+        
+        Runtime runtime = Runtime.getRuntime();
+        runtime.gc(); 
+        long memoriaAntes = runtime.totalMemory() - runtime.freeMemory();
+
+        long start = System.nanoTime();
+
+        // Ordenando a matriz passada por parâmetro    
+        formatedCsvMatrix = quickSortAchievements(formatedCsvMatrix);   
+
+        long end = System.nanoTime();
+        long duration = end - start; 
+
+        long memoriaDepois = runtime.totalMemory() - runtime.freeMemory();
+        long memoriaUsada = memoriaDepois - memoriaAntes;
+
+        // Criando de fato o arquivo .csv
+        MatrixTransformations.createCsv(formatedCsvMatrix, "games_achievements_quickSort_medioCaso.csv");
+
+        System.out.println("Done\nAverage execution time : " + duration + " ns\nMemory used on average: " + memoriaUsada + " bytes");
+    }
+
+   
+    
+    public static void createCsv_QuickSortAchievements_BestCase(String[][] formatedCsvMatrix) throws IOException{  
+        System.out.println("\nGenerating 'games_achievements_quickSort_melhorCaso.csv'");
+        
+        Runtime runtime = Runtime.getRuntime();
+        runtime.gc(); 
+        long memoriaAntes = runtime.totalMemory() - runtime.freeMemory();
+
+        long start = System.nanoTime();
+
+        // Ordenando a matriz passada por parâmetro    
+        formatedCsvMatrix = quickSortAchievements(formatedCsvMatrix);   
+
+
+        long end = System.nanoTime();
+        long duration = end - start; 
+
+        long memoriaDepois = runtime.totalMemory() - runtime.freeMemory();
+        long memoriaUsada = memoriaDepois - memoriaAntes;
+
+        // Criando de fato o arquivo .csv
+        MatrixTransformations.createCsv(formatedCsvMatrix, "games_achievements_quickSort_melhorCaso.csv");
+
+        System.out.println("Done\nAverage execution time : " + duration + " ns\nMemory used on average: " + memoriaUsada + " bytes");
+    }
+
+    
+    public static void createCsv_QuickSortAchievements_WorstCase(String[][] formatedCsvMatrix) throws IOException{  
+        System.out.println("\nGenerating 'games_achievements_quickSort_piorCaso.csv'");
+        
+        // Ordenando previamente a matriz (PIOR CASO)
+        MatrixTransformations.orderJava_Data_Descrescente(formatedCsvMatrix);
+        
+        Runtime runtime = Runtime.getRuntime();
+        runtime.gc(); 
+        long memoriaAntes = runtime.totalMemory() - runtime.freeMemory();
+
+        long start = System.nanoTime();
+
+        // Ordenando a matriz passada por parâmetro    
+        formatedCsvMatrix = quickSortAchievements(formatedCsvMatrix);   
+
+
+        long end = System.nanoTime();
+        long duration = end - start; 
+
+        long memoriaDepois = runtime.totalMemory() - runtime.freeMemory();
+        long memoriaUsada = memoriaDepois - memoriaAntes;
+
+        // Criando de fato o arquivo .csv
+        MatrixTransformations.createCsv(formatedCsvMatrix, "games_achievements_quickSort_piorCaso.csv");
 
         System.out.println("Done\nAverage execution time : " + duration + " ns\nMemory used on average: " + memoriaUsada + " bytes");
     }   

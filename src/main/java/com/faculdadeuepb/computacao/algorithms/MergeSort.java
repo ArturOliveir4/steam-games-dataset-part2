@@ -149,7 +149,7 @@ public class MergeSort {
 
 
 
-    // ---------------------------------------------- CRIAÇÃO DOS ARQUIVOS | DATA DE LANÇAMENTO ----------------------------------------------
+    // ---------------------------------------------- CRIAÇÃO DOS ARQUIVOS ----------------------------------------------
 
 
     public static void createCsv_MergeSortReleaseDate_MediumCase(String[][] formatedCsvMatrix) throws IOException{  
@@ -333,7 +333,6 @@ public class MergeSort {
 
         // Ordenando a matriz passada por parâmetro    
         formatedCsvMatrix = mergeSort_Achievements(formatedCsvMatrix, formatedCsvMatrix.length);   
-
 
         long end = System.nanoTime();
         long duration = end - start; 

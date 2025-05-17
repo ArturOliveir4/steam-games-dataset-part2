@@ -109,11 +109,11 @@ public class HeapSort {
         int left = 2 * rootIndex + 1;
         int right = 2 * rootIndex + 2;
 
-        if(left < heapSize && (MatrixTransformations.safeParseInt(data[left][26]) > MatrixTransformations.safeParseInt(data[largest][26]))){
+        if(left < heapSize && (MatrixTransformations.safeParseInt(data[left][26]) < MatrixTransformations.safeParseInt(data[largest][26]))){
             largest = left;
         }
 
-        if(right < heapSize && (MatrixTransformations.safeParseInt(data[right][26]) > MatrixTransformations.safeParseInt(data[largest][26]))){
+        if(right < heapSize && (MatrixTransformations.safeParseInt(data[right][26]) < MatrixTransformations.safeParseInt(data[largest][26]))){
             largest = right;
         }
 
@@ -310,7 +310,6 @@ public class HeapSort {
 
         // Ordenando a matriz passada por parâmetro    
         formatedCsvMatrix = heapSortAchievements(formatedCsvMatrix);   
-
 
         long end = System.nanoTime();
         long duration = end - start; 
