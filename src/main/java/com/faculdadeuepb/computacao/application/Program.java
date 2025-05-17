@@ -2,10 +2,8 @@ package com.faculdadeuepb.computacao.application;
 
 import java.io.IOException;
 
-import com.faculdadeuepb.computacao.algorithms.HeapSort;
 import com.faculdadeuepb.computacao.algorithms.InsertionSort;
 import com.faculdadeuepb.computacao.algorithms.MatrixTransformations;
-import com.faculdadeuepb.computacao.algorithms.MergeSort;
 import com.faculdadeuepb.computacao.algorithms.SelectionSort;
 import com.faculdadeuepb.computacao.model.utils.Transformations;
 
@@ -18,6 +16,28 @@ public class Program {
         // String[][] formatedCsvMatrixPartial = MatrixTransformations.csvToMatrixPartial("games_formated_release_data.csv", 0, 1000);  
         
         String[][] formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        SelectionSort.createCsv_SelectionSortAchievements_MediumCase(formatedCsvMatrixCopy);
+        
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        SelectionSort.createCsv_SelectionSortAchievements_BestCase(formatedCsvMatrixCopy);
+
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        SelectionSort.createCsv_SelectionSortAchievements_WorstCase(formatedCsvMatrixCopy);
+
+        
+        
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        InsertionSort.createCsv_InsertionSortAchievements_MediumCase(formatedCsvMatrixCopy);
+        
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        InsertionSort.createCsv_InsertionSortAchievements_BestCase(formatedCsvMatrixCopy);
+
+        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
+        InsertionSort.createCsv_InsertionSortAchievements_WorstCase(formatedCsvMatrixCopy);
+
+
+        /*
+        String[][] formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
         MergeSort.createCsv_MergeSortReleaseDate_MediumCase(formatedCsvMatrixCopy);
         
         formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
@@ -26,7 +46,7 @@ public class Program {
         formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
         MergeSort.createCsv_MergeSortReleaseDate_WorstCase(formatedCsvMatrixCopy);
 
-
+        
 
         formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
         HeapSort.createCsv_HeapSortReleaseDate_MediumCase(formatedCsvMatrixCopy);
@@ -37,6 +57,7 @@ public class Program {
         formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
         HeapSort.createCsv_HeapSortReleaseDate_WorstCase(formatedCsvMatrixCopy);
 
+        */
 
         /*
         formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
@@ -47,7 +68,7 @@ public class Program {
 
         formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
         QuickSort.createCsv_QuickSortReleaseDate_WorstCase(formatedCsvMatrixCopy);
-         */
+        */
 
 
         /* 
@@ -62,7 +83,7 @@ public class Program {
         */
 
         
-
+        /*
         formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
         InsertionSort.createCsv_InsertionSortReleaseDate_MediumCase(formatedCsvMatrixCopy);
 
@@ -133,7 +154,7 @@ public class Program {
         */
 
         
-
+        /*
         formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
         InsertionSort.createCsv_InsertionSortPrice_MediumCase(formatedCsvMatrixCopy);
 
@@ -154,7 +175,7 @@ public class Program {
         formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
         SelectionSort.createCsv_SelectionSortPrice_WorstCase(formatedCsvMatrixCopy);
         
-
+        */
         
     }
 
