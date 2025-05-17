@@ -125,7 +125,7 @@ Após instalar o Java (JDK), o Apache Maven e o Visual Studio Code, podemos, de 
     **Depois da execução:**
     ![depois da execução](./imagens/estado_final.png)
 
-📁 Os arquivos gerados (``games_formated_release_data.csv``, ``portuguese_supported_games.csv`` e ``games_linux.csv``) serão salvos no mesmo diretório de ``games.csv``.
+📁 Os arquivos gerados (``games_formated_release_data.csv``, ``portuguese_supported_games.csv``, ``games_linux.csv`` , ``games_release_date_heapSort_medioCaso.csv``, ...) serão salvos no mesmo diretório de ``games.csv``.
 
 
 ## 👥 Equipe Envolvida
