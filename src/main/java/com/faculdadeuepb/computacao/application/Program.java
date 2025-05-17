@@ -16,9 +16,8 @@ public class Program {
         // String[][] formatedCsvMatrixPartial = MatrixTransformations.csvToMatrixPartial("games_formated_release_data.csv", 0, 1000);  
         
         String[][] formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
-        SelectionSort.createCsv_SelectionSortAchievements_MediumCase(formatedCsvMatrixCopy);
+        //SelectionSort.createCsv_SelectionSortAchievements_MediumCase(formatedCsvMatrixCopy);
         
-        formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);
         SelectionSort.createCsv_SelectionSortAchievements_BestCase(formatedCsvMatrixCopy);
 
         formatedCsvMatrixCopy = deepCopy(formatedCsvMatrix);

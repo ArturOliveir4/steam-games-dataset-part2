@@ -254,9 +254,6 @@ public class SelectionSort {
 
         // Ordenando a matriz passada por parâmetro    
         formatedCsvMatrix = selectionSortAchievements(formatedCsvMatrix);   
-        for (int i = 0; i < formatedCsvMatrix.length; i++){
-            System.out.println("Linha " + i + ", Coluna 26: " + formatedCsvMatrix[i][26]);
-        }
 
         long end = System.nanoTime();
         long duration = end - start; 
