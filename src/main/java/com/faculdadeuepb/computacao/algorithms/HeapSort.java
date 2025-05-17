@@ -86,6 +86,46 @@ public class HeapSort {
         }
     }
 
+    public static String[][] heapSortAchievements(String[][] rawData){
+        int n = rawData.length;
+
+        for(int i = n / 2 - 1; i >= 0; i--){
+            heapifyAchievements(rawData, n, i);
+        }
+
+        for(int i = n - 1; i > 0; i--){
+            String[] temp = rawData[0];
+            rawData[0] = rawData[i];
+            rawData[i] = temp;
+
+            heapifyAchievements(rawData, i, 0);
+        }
+
+        return rawData;
+    }
+
+    private static void heapifyAchievements(String[][] data, int heapSize, int rootIndex){
+        int largest = rootIndex; 
+        int left = 2 * rootIndex + 1;
+        int right = 2 * rootIndex + 2;
+
+        if(left < heapSize && (MatrixTransformations.safeParseInt(data[left][26]) > MatrixTransformations.safeParseInt(data[largest][26]))){
+            largest = left;
+        }
+
+        if(right < heapSize && (MatrixTransformations.safeParseInt(data[right][26]) > MatrixTransformations.safeParseInt(data[largest][26]))){
+            largest = right;
+        }
+
+        if(largest != rootIndex){
+            String[] swap = data[rootIndex];
+            data[rootIndex] = data[largest];
+            data[largest] = swap;
+
+            heapifyAchievements(data, heapSize, largest);
+        }
+    }
+
 
     public static void createCsv_HeapSortReleaseDate_MediumCase(String[][] formatedCsvMatrix) throws IOException{  
         System.out.println("\nGenerating 'games_release_date_heapSort_medioCaso.csv'");
@@ -253,6 +293,92 @@ public class HeapSort {
 
         // Criando de fato o arquivo .csv
         MatrixTransformations.createCsv(formatedCsvMatrix, "games_price_heapSort_piorCaso.csv");
+
+        System.out.println("\nDone\nAverage execution time : " + duration + " ns\nMemory used on average: " + memoriaUsada + " bytes");
+    }   
+
+
+
+    public static void createCsv_HeapSortAchievements_MediumCase(String[][] formatedCsvMatrix) throws IOException{  
+        System.out.println("\nGenerating 'games_achievements_heapSort_medioCaso.csv'");
+        
+        Runtime runtime = Runtime.getRuntime();
+        runtime.gc(); 
+        long memoriaAntes = runtime.totalMemory() - runtime.freeMemory();
+
+        long start = System.nanoTime();
+
+        // Ordenando a matriz passada por parâmetro    
+        formatedCsvMatrix = heapSortAchievements(formatedCsvMatrix);   
+
+
+        long end = System.nanoTime();
+        long duration = end - start; 
+
+        long memoriaDepois = runtime.totalMemory() - runtime.freeMemory();
+        long memoriaUsada = memoriaDepois - memoriaAntes;
+
+        // Criando de fato o arquivo .csv
+        MatrixTransformations.createCsv(formatedCsvMatrix, "games_achievements_heapSort_medioCaso.csv");
+
+        System.out.println("Done\nAverage execution time : " + duration + " ns\nMemory used on average: " + memoriaUsada + " bytes");
+    }
+
+   
+    
+    public static void createCsv_HeapSortAchievements_BestCase(String[][] formatedCsvMatrix) throws IOException{  
+        System.out.println("\nGenerating 'games_achievements_heapSort_melhorCaso.csv'");
+        
+        // Ordenando previamente a matriz (MELHOR CASO)
+        MatrixTransformations.orderJava_Data_Crescente(formatedCsvMatrix);
+
+        Runtime runtime = Runtime.getRuntime();
+        runtime.gc(); 
+        long memoriaAntes = runtime.totalMemory() - runtime.freeMemory();
+
+        long start = System.nanoTime();
+
+        // Ordenando a matriz passada por parâmetro    
+        formatedCsvMatrix = heapSortAchievements(formatedCsvMatrix);   
+
+
+        long end = System.nanoTime();
+        long duration = end - start; 
+
+        long memoriaDepois = runtime.totalMemory() - runtime.freeMemory();
+        long memoriaUsada = memoriaDepois - memoriaAntes;
+
+        // Criando de fato o arquivo .csv
+        MatrixTransformations.createCsv(formatedCsvMatrix, "games_achievements_heapSort_melhorCaso.csv");
+
+        System.out.println("\nDone\nAverage execution time : " + duration + " ns\nMemory used on average: " + memoriaUsada + " bytes");
+    }
+
+    
+    public static void createCsv_HeapSortAchievements_WorstCase(String[][] formatedCsvMatrix) throws IOException{  
+        System.out.println("\nGenerating 'games_achievements_heapSort_piorCaso.csv'");
+        
+        // Ordenando previamente a matriz (PIOR CASO)
+        MatrixTransformations.orderJava_Data_Descrescente(formatedCsvMatrix);
+
+        Runtime runtime = Runtime.getRuntime();
+        runtime.gc(); 
+        long memoriaAntes = runtime.totalMemory() - runtime.freeMemory();
+
+        long start = System.nanoTime();
+
+        // Ordenando a matriz passada por parâmetro    
+        formatedCsvMatrix = heapSortAchievements(formatedCsvMatrix);   
+
+
+        long end = System.nanoTime();
+        long duration = end - start; 
+
+        long memoriaDepois = runtime.totalMemory() - runtime.freeMemory();
+        long memoriaUsada = memoriaDepois - memoriaAntes;
+
+        // Criando de fato o arquivo .csv
+        MatrixTransformations.createCsv(formatedCsvMatrix, "games_achievements_heapSort_piorCaso.csv");
 
         System.out.println("\nDone\nAverage execution time : " + duration + " ns\nMemory used on average: " + memoriaUsada + " bytes");
     }   

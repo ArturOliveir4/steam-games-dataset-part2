@@ -75,6 +75,45 @@ public class MatrixTransformations {
         return rawData;
     }
 
+    public static String[][] csvToMatrixPartial(String csvFileName, int startRow, int maxRows) throws IOException {
+        File csvFile = new File(csvFileName);
+
+        // Inicializando o parser e calculando o número de colunas ---------
+        CSVParser parserForCount = CSVCreate.initializeCSVParser(csvFile);
+        int columns = 0;
+
+        for (CSVRecord record : parserForCount) {
+            if (record.getRecordNumber() == 1) {
+                columns = record.size(); // assume que o cabeçalho ou primeira linha define o número de colunas
+                break;
+            }
+        }
+        parserForCount.close();
+
+        // Criando a matriz para os dados selecionados ----------
+        String[][] partialData = new String[maxRows][columns];
+
+        CSVParser parserForData = CSVCreate.initializeCSVParser(csvFile);
+        int i = 0;
+        int currentRow = 0;
+
+        for (CSVRecord record : parserForData) {
+            if (currentRow >= startRow && i < maxRows) {
+                for (int j = 0; j < columns; j++) {
+                    partialData[i][j] = record.get(j);
+                }
+                i++;
+            }
+            currentRow++;
+
+            if (i >= maxRows) break;
+        }
+
+        parserForData.close();
+        return partialData;
+    }
+
+
     public static void createCsv(String[][] orderedMatrix, String nomeArquivo) throws IOException{
         File gamesFormatedDate = new File(nomeArquivo);
         try(CSVPrinter csvPrinter = new CSVPrinter(new FileWriter(gamesFormatedDate), 
@@ -100,4 +139,11 @@ public class MatrixTransformations {
         Arrays.sort(formatedCsvMatrix, Comparator.comparing((String[] row) -> LocalDate.parse(row[2], formatter)).reversed());   
     }
 
+    public static int safeParseInt(String s) {
+        try {
+            return Integer.parseInt(s.trim());
+        } catch (Exception e) {
+            return 0; // ou algum valor default que faça sentido
+        }
+    }
 }

@@ -62,6 +62,7 @@ public class MergeSort {
         return result;
     }
 
+
     public static String[][] mergeSort_Price(String[][] dataArray, int rows) {
         if(rows <= 1){
             return dataArray;
@@ -103,6 +104,50 @@ public class MergeSort {
         return result;
 
     }
+
+    public static String[][] mergeSort_Achievements(String[][] dataArray, int rows) {
+        if(rows <= 1){
+            return dataArray;
+        }
+        int middle = rows / 2;
+
+        String[][] left = copyOfRange(dataArray, 0, middle);
+        String[][] right = copyOfRange(dataArray, middle, rows);
+
+        left = mergeSort_Achievements(left, left.length);
+        right = mergeSort_Achievements(right, right.length);
+
+        return merge_Achievements(left, right);
+    }
+
+    private static String[][] merge_Achievements(String[][] left, String[][] right) {
+        int leftSize = left.length;
+        int rightSize = right.length;
+        String[][] result = new String[leftSize + rightSize][];
+
+        int i = 0, j = 0, k = 0;
+
+        while(i < leftSize && j < rightSize){
+            if(MatrixTransformations.safeParseInt(left[i][26]) > MatrixTransformations.safeParseInt(right[j][26])){ // ordem decrescente
+                result[k++] = left[i++];
+            }else{
+                result[k++] = right[j++];
+            }
+        }
+
+        while(i < leftSize){
+            result[k++] = left[i++];
+        }
+        while(j < rightSize){
+            result[k++] = right[j++];
+        }
+
+        return result;
+    }
+
+    
+
+
 
     // ---------------------------------------------- CRIAÇÃO DOS ARQUIVOS | DATA DE LANÇAMENTO ----------------------------------------------
 
@@ -271,6 +316,92 @@ public class MergeSort {
 
         // Criando de fato o arquivo .csv
         MatrixTransformations.createCsv(formatedCsvMatrix, "games_price_mergeSort_piorCaso.csv");
+
+        System.out.println("Done\nAverage execution time : " + duration + " ns\nMemory used on average: " + memoriaUsada + " bytes");
+    }
+
+
+
+    public static void createCsv_MergeSortAchievements_MediumCase(String[][] formatedCsvMatrix) throws IOException{  
+        System.out.println("\nGenerating 'games_achievements_mergeSort_medioCaso.csv'");
+        
+        Runtime runtime = Runtime.getRuntime();
+        runtime.gc(); 
+        long memoriaAntes = runtime.totalMemory() - runtime.freeMemory();
+
+        long start = System.nanoTime();
+
+        // Ordenando a matriz passada por parâmetro    
+        formatedCsvMatrix = mergeSort_Achievements(formatedCsvMatrix, formatedCsvMatrix.length);   
+
+
+        long end = System.nanoTime();
+        long duration = end - start; 
+
+        long memoriaDepois = runtime.totalMemory() - runtime.freeMemory();
+        long memoriaUsada = memoriaDepois - memoriaAntes;
+
+        // Criando de fato o arquivo .csv
+        MatrixTransformations.createCsv(formatedCsvMatrix, "games_achievements_mergeSort_medioCaso.csv");
+
+        System.out.println("Done\nAverage execution time : " + duration + " ns\nMemory used on average: " + memoriaUsada + " bytes");
+    }
+
+   
+    
+    public static void createCsv_MergeSortAchievements_BestCase(String[][] formatedCsvMatrix) throws IOException{  
+        System.out.println("\nGenerating 'games_achievements_mergeSort_melhorCaso.csv'");
+        
+        // Ordenando previamente a matriz (MELHOR CASO)
+        MatrixTransformations.orderJava_Data_Crescente(formatedCsvMatrix);
+
+        Runtime runtime = Runtime.getRuntime();
+        runtime.gc(); 
+        long memoriaAntes = runtime.totalMemory() - runtime.freeMemory();
+
+        long start = System.nanoTime();
+
+        // Ordenando a matriz passada por parâmetro    
+        formatedCsvMatrix = mergeSort_Achievements(formatedCsvMatrix, formatedCsvMatrix.length);   
+
+
+        long end = System.nanoTime();
+        long duration = end - start; 
+
+        long memoriaDepois = runtime.totalMemory() - runtime.freeMemory();
+        long memoriaUsada = memoriaDepois - memoriaAntes;
+
+        // Criando de fato o arquivo .csv
+        MatrixTransformations.createCsv(formatedCsvMatrix, "games_achievements_mergeSort_melhorCaso.csv");
+
+        System.out.println("Done\nAverage execution time : " + duration + " ns\nMemory used on average: " + memoriaUsada + " bytes");
+    }
+
+    
+    public static void createCsv_MergeSortAchievements_WorstCase(String[][] formatedCsvMatrix) throws IOException{  
+        System.out.println("\nGenerating 'games_achievements_mergeSort_piorCaso.csv'");
+        
+        // Ordenando previamente a matriz (PIOR CASO)
+        MatrixTransformations.orderJava_Data_Descrescente(formatedCsvMatrix);
+
+        Runtime runtime = Runtime.getRuntime();
+        runtime.gc(); 
+        long memoriaAntes = runtime.totalMemory() - runtime.freeMemory();
+
+        long start = System.nanoTime();
+
+        // Ordenando a matriz passada por parâmetro    
+        formatedCsvMatrix = mergeSort_Achievements(formatedCsvMatrix, formatedCsvMatrix.length);   
+
+
+        long end = System.nanoTime();
+        long duration = end - start; 
+
+        long memoriaDepois = runtime.totalMemory() - runtime.freeMemory();
+        long memoriaUsada = memoriaDepois - memoriaAntes;
+
+        // Criando de fato o arquivo .csv
+        MatrixTransformations.createCsv(formatedCsvMatrix, "games_achievements_mergeSort_piorCaso.csv");
 
         System.out.println("Done\nAverage execution time : " + duration + " ns\nMemory used on average: " + memoriaUsada + " bytes");
     }

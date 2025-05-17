@@ -76,13 +76,22 @@ public class QuickSortMedian {
 
     private static int partitionMedianP(String[][] rawData, int low, int high){
         int pivotIndex = medianOfThreeP(rawData, low, high);
-        double pivotValue = Double.parseDouble(rawData[pivotIndex][6]);
+        String[] pivot = rawData[pivotIndex];
+
+        // Valor numérico do campo price (coluna 6)
+        double pivotPrice = Double.parseDouble(pivot[6]);
+        if (pivotPrice == 0.0) {
+            pivotPrice = 6.29; // Usa 6.29 só para comparação, sem modificar os dados
+            System.out.println("Pivot com 0.0 tratado logicamente como 6.29");
+        }
+
+        System.out.println("Valor bruto em pivot[6]: '" + pivot[6] + "'");
         
         swap(rawData, pivotIndex, high);
         
         int i = low;
-        for(int j = low; j < high; j++){
-            if(Double.parseDouble(rawData[j][6]) < pivotValue){
+        for (int j = low; j < high; j++) {
+            if (Double.parseDouble(rawData[j][6]) < pivotPrice) {
                 swap(rawData, i, j);
                 i++;
             }
@@ -94,20 +103,22 @@ public class QuickSortMedian {
 
 
     private static int medianOfThreeP(String[][] rawData, int low, int high){
-        int mid = low + (high - low)/2;
+        int mid = (low + (high - low))/2;
         
-        if(Double.parseDouble(rawData[mid][6]) < Double.parseDouble(rawData[low][6])){
+        if (Double.parseDouble(rawData[mid][6]) < Double.parseDouble(rawData[low][6])){
             swap(rawData, low, mid);
         }
-        if(Double.parseDouble(rawData[high][6]) < Double.parseDouble(rawData[low][6])){
+        if (Double.parseDouble(rawData[high][6]) < Double.parseDouble(rawData[low][6])){
             swap(rawData, low, high);
         }
-        if(Double.parseDouble(rawData[high][6]) < Double.parseDouble(rawData[mid][6])){
+        if (Double.parseDouble(rawData[high][6]) < Double.parseDouble(rawData[mid][6])){
             swap(rawData, mid, high);
         }
         
         return mid; 
     }
+    
+
 
     public static void createCsv_QuickSortMedianReleaseDate_MediumCase(String[][] formatedCsvMatrix) throws IOException{  
         System.out.println("\nGenerating 'games_release_date_quickSortMedianaDeTres_medioCaso.csv'");
