@@ -18,6 +18,7 @@ Este projeto tem como objetivo estudar o desempenho dos algoritmos de ordenaçã
 ### 🔍 Objetivo Principal (Primeira Etapa):
 Realizar transformações nos dados brutos, para garantintir que estejam no formato adequado para o processamento.
 
+
 ### ✅ Atividades Realizadas (Primeira Etapa):
 
 Utilização do arquivo "games.csv" para as seguintes transformações:
@@ -30,6 +31,43 @@ Utilização do arquivo "games.csv" para as seguintes transformações:
 
 - 🌍 Filtragem dos jogos com suporte ao idioma português (campo "Supported languages"), a partir do mesmo arquivo.  
   - Arquivo gerado: "portuguese_supported_games.csv"
+
+### 🔍 Objetivo Principal (Segunda Etapa):
+Análise de Desempenho de Algoritmos de Ordenação com Steam Games Dataset.
+
+### ✅ Atividades Realizadas (Segunda Etapa):
+
+### Transformações
+
+As seguintes transformações foram realizadas sobre o arquivo `games.csv`:
+
+- Conversão do campo **"Release date"** para o formato **DD/MM/AAAA**, gerando o arquivo `games_formated_release_data.csv`.
+- A partir deste, foi filtrado um arquivo contendo apenas jogos compatíveis com **Linux**: `games_linux.csv`.
+- Também foi gerado um arquivo com os jogos que suportam a **língua portuguesa**: `portuguese_supported_games.csv`.
+
+### Implementação da Ferramenta
+
+A ferramenta foi desenvolvida em **Java**, utilizando **exclusivamente arrays** para manipulação e ordenação dos dados, conforme exigido no projeto.
+
+Cada algoritmo de ordenação foi implementado manualmente, respeitando suas características clássicas. Os dados dos jogos foram ordenados com base nos seguintes atributos:
+
+- **Data de lançamento (Release date)**
+- **Preço (Price)**
+- **Número de conquistas (Achievements)**
+
+Para cada algoritmo e atributo, foram gerados três cenários:
+
+- **Melhor caso**
+- **Caso médio**
+- **Pior caso**
+
+### Convenção dos Arquivos de Saída
+
+Os arquivos de saída seguem a seguinte convenção de nomenclatura:
+
+``games_<atributo>_<algoritmo>_<caso>.csv``
+
+
 
 ---
 
